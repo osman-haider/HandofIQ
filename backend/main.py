@@ -5,17 +5,28 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import Response
 from fastapi.staticfiles import StaticFiles
 
-import db
-import llm
-import policy
-from models import (
-    MessageRequest,
-    MessageResponse,
-    SpeakRequest,
-    StartSessionRequest,
-    StartSessionResponse,
-)
-from scenarios import SCENARIOS, get_property_context
+if __package__:
+    from . import db, llm, policy
+    from .models import (
+        MessageRequest,
+        MessageResponse,
+        SpeakRequest,
+        StartSessionRequest,
+        StartSessionResponse,
+    )
+    from .scenarios import SCENARIOS, get_property_context
+else:
+    import db
+    import llm
+    import policy
+    from models import (
+        MessageRequest,
+        MessageResponse,
+        SpeakRequest,
+        StartSessionRequest,
+        StartSessionResponse,
+    )
+    from scenarios import SCENARIOS, get_property_context
 
 app = FastAPI(title="Handoff IQ")
 
