@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Handoff IQ — confidence-aware escalation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <div class="brand-text">
+      <h1>Handoff IQ</h1>
+      <p>Knows when to keep talking, when to ask, and when to get a human.</p>
+    </div>
+  </div>
+
+  <div class="controls">
+    <label class="control">
+      <span>Scenario</span>
+      <select id="scenario-select"></select>
+    </label>
+
+    <label class="control switch-control">
+      <span>Mode</span>
+      <button id="mode-toggle" class="switch" data-mode="smart" type="button">
+        <span class="switch-option" data-value="smart">Smart</span>
+        <span class="switch-option" data-value="naive">Naive</span>
+      </button>
+    </label>
+
+    <label class="control switch-control">
+      <span>Language</span>
+      <button id="lang-toggle" class="switch" data-lang="en" type="button">
+        <span class="switch-option" data-value="en">EN</span>
+        <span class="switch-option" data-value="es">ES</span>
+      </button>
+    </label>
+
+    <button id="start-btn" class="primary-btn" type="button">Start call</button>
+    <button id="history-btn" class="ghost-btn" type="button">Past sessions</button>
+  </div>
+</header>
+
+<p id="naive-note" class="naive-note hidden">
+  Naive mode: no confidence scoring, no clarifying questions, no handoff — this is the baseline the confidence layer is designed to improve on.
+</p>
+
+<main class="console">
+  <section class="panel transcript-panel">
+    <div class="panel-head">
+      <h2 id="scenario-title">Pick a scenario and start the call</h2>
+      <p id="scenario-subtitle"></p>
+    </div>
+
+    <div id="transcript" class="transcript" aria-live="polite"></div>
+
+    <div class="composer">
+      <button id="script-btn" class="ghost-btn" type="button" disabled>Play next scripted line</button>
+      <div class="composer-input">
+        <input id="text-input" type="text" placeholder="Or type as the caller…" disabled />
+        <button id="mic-btn" class="icon-btn" type="button" title="Record a voice message" disabled>
+          <span class="mic-dot"></span>
+        </button>
+        <button id="send-btn" class="primary-btn" type="button" disabled>Send</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel trace-panel">
+    <div class="panel-head">
+      <h2>Confidence trace</h2>
+      <p>Every turn's intent confidence, data sufficiency, and decision — live.</p>
+    </div>
+
+    <div id="handoff-card" class="handoff-card hidden"></div>
+
+    <div id="trace" class="trace"></div>
+  </section>
+</main>
+
+<div id="history-panel" class="history-panel hidden">
+  <div class="history-head">
+    <h2>Past sessions</h2>
+    <button id="history-close" class="ghost-btn" type="button">Close</button>
+  </div>
+  <div id="history-list" class="history-list"></div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
