@@ -1,0 +1,16 @@
+[project]
+name = "handoff-iq"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi==0.115.0",
+    "uvicorn[standard]==0.30.6",
+    "openai==1.51.0",
+    "httpx<0.28",
+    "python-dotenv==1.0.1",
+    "pydantic==2.9.2",
+    "python-multipart==0.0.9",
+]
+
+[tool.vercel]
+entrypoint = "backend.main:app"
