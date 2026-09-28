@@ -11,7 +11,8 @@ import uuid
 from contextlib import contextmanager
 from datetime import datetime, timezone
 
-DB_PATH = os.environ.get("HANDOFF_IQ_DB_PATH", "./handoff_iq.db")
+_DEFAULT_DB_PATH = "/tmp/handoff_iq.db" if os.environ.get("VERCEL") else "./handoff_iq.db"
+DB_PATH = os.environ.get("HANDOFF_IQ_DB_PATH", _DEFAULT_DB_PATH)
 
 
 @contextmanager
